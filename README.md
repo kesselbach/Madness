@@ -200,3 +200,5 @@ void libshell(void)
 **And we are root!**
 
 # ![17](images/root_flag(4).jpg?raw=true "root_flag")
+
++ **This was a very nice box, we learnt about .JPG corrupted files, a GNU Screen vulnerability, some ld.so.preload file overwriting to gain the desired shell and I encourage you hardly to read the [ld.so man page](https://man7.org/linux/man-pages/man8/ld.so.8.html). All the thanks goes to optional, the creator of this magic box. Cheers!**
