@@ -1,6 +1,6 @@
 # 'Madness' box writeup
 ## Madness is a CTF box created by optional and available on the [TryHackMe platform](https://tryhackme.com).
-## Read about [JPG Signature Format: Documentation & Recovery Example](https://www.file-recovery.com/jpg-signature-format.htm), [GNU Screen escalation](https://seclists.org/oss-sec/2017/q1/184)
+## Read about [JPG Signature Format: Documentation & Recovery Example](https://www.file-recovery.com/jpg-signature-format.htm), [GNU Screen escalation](https://seclists.org/oss-sec/2017/q1/184), [ld.so man page](https://man7.org/linux/man-pages/man8/ld.so.8.html) and [ld.so.preload](https://superuser.com/questions/1183037/what-is-does-ld-so-preload-do)
 # ![bg](images/5iW7kC8.jpg_Min.png?raw=true "Title")
 
 ## Foothold
