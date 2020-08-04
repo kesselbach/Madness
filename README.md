@@ -199,4 +199,4 @@ void libshell(void)
 
 **And we are root!**
 
-# ![17](images/root_flag?raw=true "root_flag")
+# ![17](images/root_flag.jpg?raw=true "root_flag")
