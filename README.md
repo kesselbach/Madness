@@ -1,7 +1,7 @@
 # 'Madness' box writeup
 ## Madness is a CTF box created by optional and available on the [TryHackMe platform](https://tryhackme.com).
 ## Read about [JPG Signature Format: Documentation & Recovery Example](https://www.file-recovery.com/jpg-signature-format.htm), 
-# ![bg](images/mad_bg.png?raw=true "Title")
+# ![bg](images/5iW7kC8.jpg_Min.png?raw=true "Title")
 
 ## Foothold
 + **We deploy the machine and start with a nmap scan for open ports**
