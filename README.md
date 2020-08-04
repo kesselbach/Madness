@@ -141,7 +141,7 @@ done
 
 ``ls -l test``
 
-# ![16](images/test.jpg?raw=true "test")
+# ![16](images/test(1).jpg?raw=true "test")
 
 + **And the file owner is root. Let's exploit this vulnerability. First, let's create a C program so we can generate a root shell and compile it. We're gonna create it in the /tmp directory**
 
@@ -199,3 +199,4 @@ void libshell(void)
 
 **And we are root!**
 
+# ![17](images/root_flag?raw=true "root_flag")
