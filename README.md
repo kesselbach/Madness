@@ -20,11 +20,11 @@
 
 ``wget http://10.10.94.80/thm.jpg``
 
-+ **Opening the image, we have a quite little problem:
++ **Opening the image, we have a quite little problem:**
 
 ``The image “file://x/Madness/thm.jpg” cannot be displayed because it contains errors.``
 
-**Let's look into the content of our image. It looks like our output says that our image is in PNG format. Maybe someone changed the image format.
+**Let's look into the content of our image. It looks like our output says that our image is in PNG format. Maybe someone changed the image format.**
 
 # ![3](images/head.jpg?raw=true "head")
 
@@ -36,7 +36,7 @@
 
 **We can clearly see the first bytes are modified, but we can change them using the hexedit tool. Let's modify the first 2 hex sequences values with:**
 
-``FF D8 FF E0  00 10 4A 46``
+``FF D8 FF E0   00 10 4A 46``
 
 ``hexedit thm.jpg``
 
