@@ -66,7 +66,7 @@
 
 + **I'm gonna use curl to get my requests and page data and i will write a shell script**
 
-```
+```bash
 #!/bin/bash
 
 for i in {0..99}
