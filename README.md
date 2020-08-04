@@ -133,7 +133,7 @@ done
 
 # ![15](images/perm.jpg?raw=true "perm")
 
-**We can see the** */bin/screen-4.5.0 **and** */bin/screen-4.5.0.old* **both having SUID permission. Reading the [GNU Screen escalation](https://seclists.org/oss-sec/2017/q1/184) request, we can follow up instructions and see that we can open the logfile with root privileges, this meaning we can create a file, owned by root, which can contain anything. Let's check it out**
+**We can see the** */bin/screen-4.5.0* **and** */bin/screen-4.5.0.old* **both having SUID permission. Reading the [GNU Screen escalation](https://seclists.org/oss-sec/2017/q1/184) request, we can follow up instructions and see that we can open the logfile with root privileges, this meaning we can create a file, owned by root, which can contain anything. Let's check it out**
 
 ``cd /etc``
 
