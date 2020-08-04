@@ -87,7 +87,7 @@ done
 
 ```
 
-**Let's make executable too and let's run it**
+**Let's make it executable too and let's run it**
 
 ``chmod a+x secret_guess.sh``
 
@@ -95,9 +95,34 @@ done
 
 # ![10](images/secrfound.jpg?raw=true "secretf")
 
+## User escalation
+
 + **We received a message which maybe will help us to decrypt something. After more enumeration, we find out the** thm.jpg **file seems to contain some data inside. We will use steghide to extract the stego image; the passphrase will be the message received**
 
-``steghide --extract -sf thm.jpg**``
+``steghide --extract -sf thm.jpg``
 
+# ![11](images/foundit.jpg?raw=true "found")
 
+**The image contained a file named** hidden.txt **and, reading it we'll find the username. But, it seems to be encoded with a rot13 cipher, so let's decode it**
 
+``echo "xxxxx" |  tr 'A-Za-z' 'N-ZA-Mn-za-m'``
+
++ **We have the username, but we have no password so we can connect to the ssh. Continuing the enumeration and considering the predomination of images in this box, we have one image that we probably skipped: the one inside the tryhackme platform.**
+
+# ![12](images/platform.jpg?raw=true "platform")
+
+**Let's extract this image too and see what's inside**
+
+``steghide --extract -sf 5iW7kC8.jpg``
+
+# ![12](images/passwordf.jpg?raw=true "pass")
+
++ **We got out password now, so let's connect to ssh**
+
+``ssh youfoundme@10.10.94.80``
+
+# ![12](images/user_flago_re.jpg?raw=true "user_flag")
+
+**We found our first user flag inside our home directory. Let's move on to the root flag**
+        
+## Root escalation
